@@ -5,10 +5,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initializeResources(context: context);
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MaterialApp(
-        title: 'Take Home',
+        title: appConstants.appName,
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),

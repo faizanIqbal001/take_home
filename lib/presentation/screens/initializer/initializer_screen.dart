@@ -26,7 +26,6 @@ class _InitializerScreenState extends State<InitializerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    initializeResources(context: context);
     return BlocConsumer<InitializerBloc, InitializerState>(
         listener: (context, state) {
       switch (state.status) {
