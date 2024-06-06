@@ -26,6 +26,11 @@ Future<void> main() async {
                 //   ShowOnBoarding(),
                 // ),
                 ),
+            BlocProvider.value(value: serviceLocator<HomeScreenBloc>()
+              // ..add(
+              //   ShowOnBoarding(),
+              // ),
+            ),
           ],
           child: const MyApp(),
         ),

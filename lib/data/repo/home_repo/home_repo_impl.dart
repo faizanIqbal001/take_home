@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:take_home/data/models/home_screen_models/active_task_response_model.dart';
 import 'package:take_home/export.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -7,31 +8,87 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl({required this.networkHelper, required this.storageRepo});
 
-  // @override
-  // Future<Either<GetAgentInfoResponseModel, Failure>> getAgentInfo(
-  //   String agentId,
-  // ) async {
-  //   final response = await networkHelper.get(
-  //     NetworkEndPoints.getAgentInfo.replaceAll("{agentId}", agentId),
-  //   );
-  //
-  //   return response.fold(
-  //     (success) {
-  //       GetAgentInfoResponseModel getAgentInfoResponseModel =
-  //           GetAgentInfoResponseModel.fromJson(
-  //         jsonDecode(success),
-  //       );
-  //       return Left(getAgentInfoResponseModel);
-  //     },
-  //     (error) {
-  //       return Right(
-  //         Failure(
-  //           status: false,
-  //           message: error.message,
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  @override
+  Future<Either<SingleProjectResponseModel, Failure>> getSingleProject({
+    required String projectId,
+  }) async {
+    final response = await networkHelper.get(
+      NetworkEndPoints.singleProject.replaceAll("{projectId}", projectId),
+    );
 
+    return response.fold(
+      (success) {
+        SingleProjectResponseModel singleProjectResponseModel =
+            SingleProjectResponseModel.fromJson(
+          jsonDecode(success),
+        );
+        return Left(singleProjectResponseModel);
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<List<SectionResponseModel>, Failure>> getProjectSections({
+    required String projectId,
+  }) async {
+    final response = await networkHelper.get(
+      NetworkEndPoints.sections.replaceAll("{projectId}", projectId),
+    );
+
+    return response.fold(
+      (success) {
+        List<SectionResponseModel> sections = [];
+        var dummyList = jsonDecode(success);
+        for (var section in dummyList) {
+          sections.add(SectionResponseModel.fromJson(section));
+        }
+
+        return Left(sections);
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<List<ActiveTaskResponseModel>, Failure>>
+      getActiveTasks() async {
+    final response = await networkHelper.get(
+      NetworkEndPoints.activeTasks,
+    );
+
+    return response.fold(
+      (success) {
+        List<ActiveTaskResponseModel> sections = [];
+        var dummyList = jsonDecode(success);
+        for (var section in dummyList) {
+          sections.add(ActiveTaskResponseModel.fromJson(section));
+        }
+
+        return Left(sections);
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
 }

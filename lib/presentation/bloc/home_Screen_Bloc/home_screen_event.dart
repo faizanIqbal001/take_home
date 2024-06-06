@@ -5,27 +5,10 @@ abstract class HomeScreenEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetUserName extends HomeScreenEvent {}
 
-class GetTransactionsEvent extends HomeScreenEvent {}
+class GetSingleProject extends HomeScreenEvent {}
+class GetSections extends HomeScreenEvent {}
+class GetActiveTasks extends HomeScreenEvent {}
 
-class ChangeAnalyticsStatus extends HomeScreenEvent {
-  final HomeScreenStatus homeScreenStatus;
 
-  ChangeAnalyticsStatus({
-    required this.homeScreenStatus,
-  });
-}
 
-class GetHomeStats extends HomeScreenEvent {
-  final String? startDate;
-  final String? endDate;
-
-  GetHomeStats({
-    this.endDate,
-    this.startDate,
-  });
-}
-
-class InitStateValuesEvent extends HomeScreenEvent {}
-class InitializeData extends HomeScreenEvent {}

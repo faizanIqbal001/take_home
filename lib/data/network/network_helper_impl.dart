@@ -170,9 +170,7 @@ class NetworkHelperImpl extends NetworkHelper {
     try {
       headers ??= <String, String>{};
       headers['Content-Type'] = 'application/json';
-        headers['Authorization'] = storageRepo.getString(
-          key: StorageKey.token,
-        );
+      headers['Authorization'] = "Bearer 81bdf26d342a23f2290fd2e2e9b513ecf2facde9";
     } catch (e) {
       debugPrint(e.toString());
     }

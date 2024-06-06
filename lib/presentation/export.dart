@@ -10,6 +10,7 @@ export 'bloc/export.dart';
 export 'extension/export.dart';
 export 'res/export.dart';
 export 'base_view/export.dart';
+export 'widgets/export.dart';
 
 /// modules export
 export 'screens/export.dart';
