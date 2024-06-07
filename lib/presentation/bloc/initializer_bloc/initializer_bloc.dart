@@ -11,6 +11,7 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     required this.initializerUseCase,
   }) : super(const InitializerState()) {
     on<NavigateToHomeScreen>(_navigateToHomeScreen);
+    on<SaveUuid>(_saveUuid);
   }
 
   _navigateToHomeScreen(NavigateToHomeScreen event, emit) {
@@ -19,5 +20,9 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
         status: InitializerStatus.navigateToHome,
       ),
     );
+  }
+
+  _saveUuid(SaveUuid event, emit) {
+    initializerUseCase.saveUuid();
   }
 }

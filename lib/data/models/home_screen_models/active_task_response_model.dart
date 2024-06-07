@@ -47,7 +47,15 @@ class ActiveTaskResponseModel {
     isCompleted = json['is_completed'];
     content = json['content'];
     description = json['description'];
-    due = json['due'] != null ? Due.fromJson(json['due']) : null;
+    due = json['due'] != null
+        ? Due.fromJson(json['due'])
+        : Due(
+            date: "",
+            datetime: "",
+            isRecurring: false,
+            string: "",
+            timezone: "",
+          );
     duration = json['duration'];
     id = json['id'];
     labels = json['labels'].cast<String>();

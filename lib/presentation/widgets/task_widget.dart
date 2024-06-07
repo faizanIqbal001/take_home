@@ -4,20 +4,25 @@ class TaskWidget extends StatefulWidget {
   final String title;
   final String description;
   final int priority;
+  final List<String> types;
+  final String selectedType;
+  Function(String) onTypeTap;
 
-  const TaskWidget(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.priority});
+  TaskWidget({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.priority,
+    required this.types,
+    required this.selectedType,
+    required this.onTypeTap,
+  });
 
   @override
   _TaskWidgetState createState() => _TaskWidgetState();
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
-  String _selectedSection = 'To Do';
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -40,14 +45,10 @@ class _TaskWidgetState extends State<TaskWidget> {
             const SizedBox(height: 16.0),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               DropdownButton<String>(
-                value: _selectedSection,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedSection = newValue!;
-                  });
-                },
-                items: <String>['To Do', 'In Progress', 'Done']
-                    .map<DropdownMenuItem<String>>((String value) {
+                value: widget.selectedType,
+                onChanged: (String? newValue) => widget.onTypeTap(newValue!),
+                items:
+                    widget.types.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),

@@ -1,18 +1,21 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:take_home/export.dart';
 
 class TaskTabs extends StatelessWidget {
   Function onToDoTap;
   Function onInProgressTap;
   Function onDoneTap;
+  bool toDoSelected;
+  bool inProgressSelected;
+  bool doneSelected;
 
   TaskTabs({
     super.key,
     required this.onToDoTap,
     required this.onInProgressTap,
     required this.onDoneTap,
+    required this.toDoSelected,
+    required this.inProgressSelected,
+    required this.doneSelected,
   });
 
   @override
@@ -37,8 +40,11 @@ class TaskTabs extends StatelessWidget {
                     horizontal: horizontalValue(20),
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: toDoSelected ? Colors.orange : Colors.white,
                     borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
                   ),
                   child: Center(
                     child: Text(
@@ -67,8 +73,11 @@ class TaskTabs extends StatelessWidget {
                       horizontal: horizontalValue(20),
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.yellow,
+                      color: inProgressSelected ? Colors.yellow : Colors.white,
                       borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
                     ),
                     child: Center(
                       child: Text(
@@ -99,8 +108,11 @@ class TaskTabs extends StatelessWidget {
                       horizontal: horizontalValue(20),
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: doneSelected ? Colors.blue : Colors.white,
                       borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
                     ),
                     child: Center(
                       child: Text(

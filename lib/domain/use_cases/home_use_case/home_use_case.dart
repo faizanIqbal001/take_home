@@ -9,14 +9,19 @@ class HomeUseCase {
 
   SingleProjectResponseModel? singleProjectResponseModel;
   List<SectionResponseModel>? sections;
-  List<ActiveTaskResponseModel>? activeTasks;
+  List<ActiveTaskResponseModel> activeTasks = [];
 
   List<ActiveTaskResponseModel> toDo = [];
   List<ActiveTaskResponseModel> inProgress = [];
   List<ActiveTaskResponseModel> done = [];
 
+  List<String> types = ['To Do', 'In Progress', 'Done'];
+
+  String Uuid = "";
+
   ///Get Specific Project Based On Id
   Future<Either<Success, Failure>> getSingleProject() async {
+    getUuid();
     final response = await homeRepo.getSingleProject(
       projectId: "2334298201",
     );
@@ -46,6 +51,78 @@ class HomeUseCase {
     return response.fold(
       (success) {
         sections = success;
+        return Left(
+          Success(),
+        );
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  ///Update Task
+  Future<Either<Success, Failure>> upDateTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await homeRepo.updateTask(
+      activeTaskResponseModel: activeTaskResponseModel,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          Success(),
+        );
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  ///Create Task
+  Future<Either<Success, Failure>> createTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await homeRepo.createTask(
+      activeTaskResponseModel: activeTaskResponseModel,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          Success(),
+        );
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  ///Delete Task
+  Future<Either<Success, Failure>> deleteTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await homeRepo.deleteTask(
+      activeTaskResponseModel: activeTaskResponseModel,
+    );
+    return response.fold(
+      (success) {
         return Left(
           Success(),
         );
@@ -104,5 +181,9 @@ class HomeUseCase {
         }
       }
     }
+  }
+
+  Future<void> getUuid() async {
+    Uuid = await homeRepo.getUuid();
   }
 }

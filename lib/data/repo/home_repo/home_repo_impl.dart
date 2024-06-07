@@ -91,4 +91,99 @@ class HomeRepoImpl implements HomeRepo {
       },
     );
   }
+
+  @override
+  Future<Either<ActiveTaskResponseModel, Failure>> updateTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await networkHelper.post(
+      NetworkEndPoints.updateTask.replaceAll(
+        "{taskId}",
+        activeTaskResponseModel.id.toString(),
+      ),
+      body: activeTaskResponseModel.toJson(),
+    );
+
+    return response.fold(
+      (success) {
+        ActiveTaskResponseModel activeTaskResponseModel;
+        activeTaskResponseModel = ActiveTaskResponseModel.fromJson(
+          jsonDecode(success),
+        );
+        return Left(activeTaskResponseModel);
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<ActiveTaskResponseModel, Failure>> deleteTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await networkHelper.delete(
+      NetworkEndPoints.updateTask.replaceAll(
+        "{taskId}",
+        activeTaskResponseModel.id.toString(),
+      ),
+    );
+
+    return response.fold(
+      (success) {
+        ActiveTaskResponseModel activeTaskResponseModel;
+        activeTaskResponseModel = ActiveTaskResponseModel.fromJson(
+          jsonDecode(success),
+        );
+        return Left(activeTaskResponseModel);
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<String, Failure>> createTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  }) async {
+    final response = await networkHelper.post(
+      NetworkEndPoints.activeTasks.replaceAll(
+        "{taskId}",
+        activeTaskResponseModel.id.toString(),
+      ),
+      body: activeTaskResponseModel.toJson(),
+    );
+
+    return response.fold(
+      (success) {
+        return const Left("!");
+      },
+      (error) {
+        return Right(
+          Failure(
+            status: false,
+            message: error.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<String> getUuid() async {
+    return storageRepo.getString(
+      key: StorageKey.uuid,
+    );
+  }
 }

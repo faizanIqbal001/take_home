@@ -16,4 +16,18 @@ mixin HomeRepo {
   });
 
   Future<Either<List<ActiveTaskResponseModel>, Failure>> getActiveTasks();
+
+  Future<String> getUuid();
+
+  Future<Either<ActiveTaskResponseModel, Failure>> updateTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  });
+
+  Future<Either<String, Failure>> createTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  });
+
+  Future<Either<ActiveTaskResponseModel, Failure>> deleteTask({
+    required ActiveTaskResponseModel activeTaskResponseModel,
+  });
 }

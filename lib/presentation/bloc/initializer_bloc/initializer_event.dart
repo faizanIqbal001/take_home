@@ -6,3 +6,4 @@ abstract class InitializerEvent extends Equatable {
 }
 
 class NavigateToHomeScreen extends InitializerEvent {}
+class SaveUuid extends InitializerEvent {}

@@ -9,5 +9,9 @@ class InitializerUseCase {
   });
 
 
+  Future<void> saveUuid() async{
+   await initializerRepo.saveUuid();
+  }
+
 
 }

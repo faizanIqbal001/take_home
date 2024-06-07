@@ -4,4 +4,5 @@ class NetworkEndPoints {
   static String singleProject = '$baseUrl/projects/{projectId}';
   static String sections = '$baseUrl/sections?project_id={projectId}';
   static String activeTasks = '$baseUrl/tasks';
+  static String updateTask = '$baseUrl/tasks/{taskId}';
 }

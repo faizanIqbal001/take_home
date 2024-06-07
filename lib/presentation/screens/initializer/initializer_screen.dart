@@ -1,4 +1,3 @@
-import 'package:flutter_profile_picture/extends/colors/color.dart';
 import 'package:take_home/export.dart';
 
 class InitializerScreen extends StatefulWidget {
@@ -14,6 +13,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<InitializerBloc>().add(SaveUuid());
     Future.delayed(
       const Duration(seconds: 5),
       () {

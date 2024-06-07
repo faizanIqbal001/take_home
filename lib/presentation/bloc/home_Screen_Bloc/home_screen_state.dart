@@ -8,19 +8,32 @@ class HomeScreenState extends Equatable {
   final List<SectionResponseModel>? sections;
   final List<ActiveTaskResponseModel>? activeTasks;
 
-  final List<ActiveTaskResponseModel>? toDo;
-  final List<ActiveTaskResponseModel>? inProgress;
-  final List<ActiveTaskResponseModel>? done;
+   List<ActiveTaskResponseModel> toDo = [];
+   List<ActiveTaskResponseModel> inProgress = [];
+   List<ActiveTaskResponseModel> done= [];
 
-  const HomeScreenState({
+  final bool toDoSelected;
+  final bool inProgressSelected;
+  final bool doneSelected;
+
+  List<String> typesOfTasks = ['ToDo', 'InProgress', 'Done'];
+
+  final bool loadingForUpdateLists;
+
+  HomeScreenState({
     this.status = HomeScreenStatus.loading,
     this.singleProjectResponseModel,
     this.projectName,
     this.sections,
     this.activeTasks,
-    this.toDo,
-    this.inProgress,
-    this.done,
+    this.toDo = const [],
+    this.inProgress = const [],
+    this.done = const [],
+    this.toDoSelected = true,
+    this.inProgressSelected = false,
+    this.doneSelected = false,
+    this.typesOfTasks = const ['ToDo', 'InProgress', 'Done'],
+    this.loadingForUpdateLists = false,
   });
 
   HomeScreenState copyWith({
@@ -32,6 +45,11 @@ class HomeScreenState extends Equatable {
     List<ActiveTaskResponseModel>? toDo,
     List<ActiveTaskResponseModel>? inProgress,
     List<ActiveTaskResponseModel>? done,
+    bool? toDoSelected,
+    bool? inProgressSelected,
+    bool? doneSelected,
+    List<String>? typesOfTasks,
+    bool? loadingForUpdateLists,
   }) {
     return HomeScreenState(
       status: status ?? this.status,
@@ -43,6 +61,12 @@ class HomeScreenState extends Equatable {
       toDo: toDo ?? this.toDo,
       inProgress: inProgress ?? this.inProgress,
       done: done ?? this.done,
+      toDoSelected: toDoSelected ?? this.toDoSelected,
+      inProgressSelected: inProgressSelected ?? this.inProgressSelected,
+      doneSelected: doneSelected ?? this.doneSelected,
+      typesOfTasks: typesOfTasks ?? this.typesOfTasks,
+      loadingForUpdateLists:
+          loadingForUpdateLists ?? this.loadingForUpdateLists,
     );
   }
 
@@ -56,5 +80,10 @@ class HomeScreenState extends Equatable {
         toDo,
         inProgress,
         done,
+        toDoSelected,
+        inProgressSelected,
+        doneSelected,
+        typesOfTasks,
+        loadingForUpdateLists,
       ];
 }
