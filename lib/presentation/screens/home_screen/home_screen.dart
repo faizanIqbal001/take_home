@@ -320,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () {},
         child: Container(
           height: sizes.widthRatio * 40,
-          width: sizes.widthRatio * 80,
+          width: sizes.widthRatio * 90,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
             color: Colors.red.withOpacity(0.2),

@@ -3,7 +3,6 @@ export 'dart:async';
 export 'dart:convert';
 export 'dart:io';
 export 'package:flutter/material.dart';
-export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:uuid/uuid.dart';
 

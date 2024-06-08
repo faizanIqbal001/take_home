@@ -37,7 +37,7 @@ class TaskTabs extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(
                     vertical: verticalValue(16),
-                    horizontal: horizontalValue(20),
+                    horizontal: horizontalValue(10),
                   ),
                   decoration: BoxDecoration(
                     color: toDoSelected ? Colors.orange : Colors.white,
@@ -70,7 +70,7 @@ class TaskTabs extends StatelessWidget {
                     ),
                     padding: EdgeInsets.symmetric(
                       vertical: verticalValue(16),
-                      horizontal: horizontalValue(20),
+                      horizontal: horizontalValue(10),
                     ),
                     decoration: BoxDecoration(
                       color: inProgressSelected ? Colors.yellow : Colors.white,
@@ -105,7 +105,7 @@ class TaskTabs extends StatelessWidget {
                     ),
                     padding: EdgeInsets.symmetric(
                       vertical: verticalValue(16),
-                      horizontal: horizontalValue(20),
+                      horizontal: horizontalValue(10),
                     ),
                     decoration: BoxDecoration(
                       color: doneSelected ? Colors.blue : Colors.white,
