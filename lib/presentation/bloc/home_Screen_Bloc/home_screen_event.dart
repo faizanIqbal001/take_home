@@ -46,3 +46,11 @@ class UpdateLists extends HomeScreenEvent {
     required this.selectedIndex,
   });
 }
+
+class ChangeTaskSection extends HomeScreenEvent {
+  String selectedType;
+
+  ChangeTaskSection({
+    required this.selectedType,
+  });
+}

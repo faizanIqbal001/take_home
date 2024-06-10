@@ -8,9 +8,9 @@ class HomeScreenState extends Equatable {
   final List<SectionResponseModel>? sections;
   final List<ActiveTaskResponseModel>? activeTasks;
 
-   List<ActiveTaskResponseModel> toDo = [];
-   List<ActiveTaskResponseModel> inProgress = [];
-   List<ActiveTaskResponseModel> done= [];
+  List<ActiveTaskResponseModel> toDo = [];
+  List<ActiveTaskResponseModel> inProgress = [];
+  List<ActiveTaskResponseModel> done = [];
 
   final bool toDoSelected;
   final bool inProgressSelected;
@@ -19,6 +19,12 @@ class HomeScreenState extends Equatable {
   List<String> typesOfTasks = ['ToDo', 'InProgress', 'Done'];
 
   final bool loadingForUpdateLists;
+
+  ///Create Task Variables
+  TextEditingController? taskTitleController = TextEditingController();
+  TextEditingController? taskDescriptionController = TextEditingController();
+  String selectedTaskType = "ToDo";
+  int selectedPriority = 4;
 
   HomeScreenState({
     this.status = HomeScreenStatus.loading,
@@ -34,6 +40,10 @@ class HomeScreenState extends Equatable {
     this.doneSelected = false,
     this.typesOfTasks = const ['ToDo', 'InProgress', 'Done'],
     this.loadingForUpdateLists = false,
+    this.taskTitleController,
+    this.taskDescriptionController,
+    this.selectedTaskType = "ToDo",
+    this.selectedPriority = 1,
   });
 
   HomeScreenState copyWith({
@@ -50,6 +60,10 @@ class HomeScreenState extends Equatable {
     bool? doneSelected,
     List<String>? typesOfTasks,
     bool? loadingForUpdateLists,
+    TextEditingController? taskTitleController,
+    TextEditingController? taskDescriptionController,
+    String? selectedTaskType,
+    int? selectedPriority,
   }) {
     return HomeScreenState(
       status: status ?? this.status,
@@ -67,6 +81,11 @@ class HomeScreenState extends Equatable {
       typesOfTasks: typesOfTasks ?? this.typesOfTasks,
       loadingForUpdateLists:
           loadingForUpdateLists ?? this.loadingForUpdateLists,
+      taskTitleController: taskTitleController ?? this.taskTitleController,
+      taskDescriptionController:
+          taskTitleController ?? this.taskDescriptionController,
+      selectedTaskType: selectedTaskType ?? this.selectedTaskType,
+      selectedPriority: selectedPriority ?? this.selectedPriority,
     );
   }
 
@@ -85,5 +104,9 @@ class HomeScreenState extends Equatable {
         doneSelected,
         typesOfTasks,
         loadingForUpdateLists,
+        taskTitleController,
+        taskDescriptionController,
+        selectedTaskType,
+        selectedPriority,
       ];
 }

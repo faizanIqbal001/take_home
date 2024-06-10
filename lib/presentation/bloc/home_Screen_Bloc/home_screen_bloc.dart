@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:take_home/data/models/home_screen_models/active_task_response_model.dart';
 import 'package:take_home/export.dart';
 
@@ -15,6 +18,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<TabSelection>(_tabSelection);
     on<UpdateLists>(_updateLists);
     on<LoadingOnListUpdate>(_loadingForUpdateList);
+    on<ChangeTaskSection>(_changeTaskSection);
   }
 
   void _getSingleProject(
@@ -220,5 +224,17 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       }
     }
     return "";
+  }
+
+  ///
+  void _changeTaskSection(
+    ChangeTaskSection event,
+    emit,
+  ) async {
+    emit(
+      state.copyWith(
+        selectedTaskType: event.selectedType,
+      ),
+    );
   }
 }
