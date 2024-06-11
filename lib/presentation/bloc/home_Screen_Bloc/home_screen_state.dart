@@ -23,7 +23,7 @@ class HomeScreenState extends Equatable {
   ///Create Task Variables
   TextEditingController? taskTitleController = TextEditingController();
   TextEditingController? taskDescriptionController = TextEditingController();
-  String selectedTaskType = "ToDo";
+  final String selectedTaskType;
   int selectedPriority = 4;
 
   HomeScreenState({
