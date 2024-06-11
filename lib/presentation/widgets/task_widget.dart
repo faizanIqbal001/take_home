@@ -30,7 +30,13 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
-      color: Colors.greenAccent,
+      color: widget.priority == 1
+          ? Colors.greenAccent
+          : widget.priority == 2
+              ? Colors.amberAccent
+              : widget.priority == 3
+                  ? Colors.teal
+                  : Colors.deepPurpleAccent,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,7 +57,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   child: const Icon(
                     Icons.delete,
                     size: 30,
-                    color: Colors.red,
+                    color: Colors.white,
                   ),
                 ),
               ],
