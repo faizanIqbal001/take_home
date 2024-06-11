@@ -23,11 +23,11 @@ mixin HomeRepo {
     required ActiveTaskResponseModel activeTaskResponseModel,
   });
 
-  Future<Either<String, Failure>> createTask({
+  Future<Either<ActiveTaskResponseModel, Failure>> createTask({
     required ActiveTaskResponseModel activeTaskResponseModel,
   });
 
-  Future<Either<ActiveTaskResponseModel, Failure>> deleteTask({
+  Future<Either<String, Failure>> deleteTask({
     required ActiveTaskResponseModel activeTaskResponseModel,
   });
 }

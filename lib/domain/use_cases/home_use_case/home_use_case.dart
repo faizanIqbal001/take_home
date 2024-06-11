@@ -99,6 +99,17 @@ class HomeUseCase {
     );
     return response.fold(
       (success) {
+        for(var section in sections!){
+          if(section.id == success.sectionId && section.name == "ToDo"){
+            toDo.add(success);
+          }
+          if(section.id == success.sectionId && section.name == "InProgress"){
+            inProgress.add(success);
+          }
+          if(section.id == success.sectionId && section.name == "Done"){
+            done.add(success);
+          }
+        }
         return Left(
           Success(),
         );
@@ -118,24 +129,33 @@ class HomeUseCase {
   Future<Either<Success, Failure>> deleteTask({
     required ActiveTaskResponseModel activeTaskResponseModel,
   }) async {
-    final response = await homeRepo.deleteTask(
-      activeTaskResponseModel: activeTaskResponseModel,
-    );
-    return response.fold(
-      (success) {
-        return Left(
-          Success(),
-        );
-      },
-      (error) {
-        return Right(
-          Failure(
-            status: false,
-            message: error.message,
-          ),
-        );
-      },
-    );
+    try {
+      final response = await homeRepo.deleteTask(
+        activeTaskResponseModel: activeTaskResponseModel,
+      );
+      return response.fold(
+        (success) {
+          return Left(
+            Success(),
+          );
+        },
+        (error) {
+          return Right(
+            Failure(
+              status: false,
+              message: error.message,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      return Right(
+        Failure(
+          status: false,
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   ///Get Active Tasks

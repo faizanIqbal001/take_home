@@ -23,6 +23,7 @@ class CustomTextField extends StatelessWidget {
         const SizedBox(height: 8),
         TextField(
           controller: controller,
+          textInputAction: TextInputAction.done,
           decoration: InputDecoration(
             hintText: hintText,
             contentPadding:
@@ -31,7 +32,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.blue, width: 2),
             ),
           ),

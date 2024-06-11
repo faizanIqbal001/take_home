@@ -2,18 +2,24 @@ import 'package:take_home/export.dart';
 
 class CreateTaskBottomSheet extends StatelessWidget {
   TextEditingController taskTitleController;
+  TextEditingController taskDescriptionController;
   Function onCreateTap;
   List<String> sections;
+  List<String> taskPriority;
   Function(String) onSectionChange;
+  Function(String) onPriorityChange;
   String selectedValue;
 
   CreateTaskBottomSheet({
     super.key,
     required this.taskTitleController,
+    required this.taskDescriptionController,
     required this.onCreateTap,
     required this.sections,
     required this.onSectionChange,
+    required this.onPriorityChange,
     required this.selectedValue,
+    required this.taskPriority,
   });
 
   @override
@@ -74,20 +80,65 @@ class CreateTaskBottomSheet extends StatelessWidget {
               ),
               verticalSpacer(10),
               CustomTextField(
-                controller: taskTitleController,
+                controller: taskDescriptionController,
                 title: "Description",
                 hintText: "Enter Description Here...",
               ),
               verticalSpacer(20),
-              DropdownButton<String>(
-                value: selectedValue,
-                onChanged: (String? newValue) => onSectionChange(newValue!),
-                items: sections.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Task Type",
+                        style: textStyles.medium.copyWith(
+                          color: Colors.black,
+                        ),
+                      ),
+                      BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return DropdownButton<String>(
+                              value: state.selectedTaskType,
+                              onChanged: (String? newValue) => onSectionChange(newValue!),
+                              items: sections.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            );
+                          }),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Task Priority",
+                        style: textStyles.medium.copyWith(
+                          color: Colors.black,
+                        ),
+                      ),
+                      BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return DropdownButton<String>(
+                              value: state.selectedPriority,
+                              onChanged: (String? newValue) => onPriorityChange(newValue!),
+                              items: taskPriority.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            );
+                          }),
+                    ],
+                  ),
+                ],
               ),
               verticalSpacer(20),
               InkWell(

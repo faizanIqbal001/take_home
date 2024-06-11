@@ -17,14 +17,13 @@ class HomeScreenState extends Equatable {
   final bool doneSelected;
 
   List<String> typesOfTasks = ['ToDo', 'InProgress', 'Done'];
+  List<String> taskPriority = ['Urgent', 'High', 'Average', 'Low'];
 
   final bool loadingForUpdateLists;
 
   ///Create Task Variables
-  TextEditingController? taskTitleController = TextEditingController();
-  TextEditingController? taskDescriptionController = TextEditingController();
   final String selectedTaskType;
-  int selectedPriority = 4;
+  final String selectedPriority;
 
   HomeScreenState({
     this.status = HomeScreenStatus.loading,
@@ -39,11 +38,10 @@ class HomeScreenState extends Equatable {
     this.inProgressSelected = false,
     this.doneSelected = false,
     this.typesOfTasks = const ['ToDo', 'InProgress', 'Done'],
+    this.taskPriority = const ['Urgent', 'High', 'Average', 'Low'],
     this.loadingForUpdateLists = false,
-    this.taskTitleController,
-    this.taskDescriptionController,
     this.selectedTaskType = "ToDo",
-    this.selectedPriority = 1,
+    this.selectedPriority = "Low",
   });
 
   HomeScreenState copyWith({
@@ -59,11 +57,10 @@ class HomeScreenState extends Equatable {
     bool? inProgressSelected,
     bool? doneSelected,
     List<String>? typesOfTasks,
+    List<String>? taskPriority,
     bool? loadingForUpdateLists,
-    TextEditingController? taskTitleController,
-    TextEditingController? taskDescriptionController,
     String? selectedTaskType,
-    int? selectedPriority,
+    String? selectedPriority,
   }) {
     return HomeScreenState(
       status: status ?? this.status,
@@ -71,6 +68,7 @@ class HomeScreenState extends Equatable {
           singleProjectResponseModel ?? this.singleProjectResponseModel,
       projectName: projectName ?? this.projectName,
       sections: sections ?? this.sections,
+      taskPriority: taskPriority ?? this.taskPriority,
       activeTasks: activeTasks ?? this.activeTasks,
       toDo: toDo ?? this.toDo,
       inProgress: inProgress ?? this.inProgress,
@@ -81,9 +79,6 @@ class HomeScreenState extends Equatable {
       typesOfTasks: typesOfTasks ?? this.typesOfTasks,
       loadingForUpdateLists:
           loadingForUpdateLists ?? this.loadingForUpdateLists,
-      taskTitleController: taskTitleController ?? this.taskTitleController,
-      taskDescriptionController:
-          taskTitleController ?? this.taskDescriptionController,
       selectedTaskType: selectedTaskType ?? this.selectedTaskType,
       selectedPriority: selectedPriority ?? this.selectedPriority,
     );
@@ -96,6 +91,7 @@ class HomeScreenState extends Equatable {
         projectName,
         sections,
         activeTasks,
+        taskPriority,
         toDo,
         inProgress,
         done,
@@ -104,8 +100,6 @@ class HomeScreenState extends Equatable {
         doneSelected,
         typesOfTasks,
         loadingForUpdateLists,
-        taskTitleController,
-        taskDescriptionController,
         selectedTaskType,
         selectedPriority,
       ];

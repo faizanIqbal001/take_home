@@ -6,4 +6,6 @@ class AppConstants {
   String inProgress = 'In Progress';
   String done = 'Done';
 
+  String projectId = '2334298201';
+
 }

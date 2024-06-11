@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:take_home/export.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -7,6 +8,7 @@ class TaskWidget extends StatefulWidget {
   final List<String> types;
   final String selectedType;
   Function(String) onTypeTap;
+  Function onDeleteTap;
 
   TaskWidget({
     super.key,
@@ -16,6 +18,7 @@ class TaskWidget extends StatefulWidget {
     required this.types,
     required this.selectedType,
     required this.onTypeTap,
+    required this.onDeleteTap,
   });
 
   @override
@@ -33,12 +36,25 @@ class _TaskWidgetState extends State<TaskWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              widget.title,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.title,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => widget.onDeleteTap(),
+                  child: const Icon(
+                    Icons.delete,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 8.0),
             Text(widget.description),

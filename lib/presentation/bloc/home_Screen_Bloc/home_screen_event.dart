@@ -54,3 +54,33 @@ class ChangeTaskSection extends HomeScreenEvent {
     required this.selectedType,
   });
 }
+
+class ChangePrioritySection extends HomeScreenEvent {
+  String selectedPriority;
+
+  ChangePrioritySection({
+    required this.selectedPriority,
+  });
+}
+
+class CreateNewTask extends HomeScreenEvent {
+  String title;
+  String description;
+
+  CreateNewTask({
+    required this.title,
+    required this.description,
+  });
+}
+
+class ChangeStatus extends HomeScreenEvent {
+  HomeScreenStatus status;
+
+  ChangeStatus({required this.status});
+}
+
+class RemoveTask extends HomeScreenEvent {
+  int index;
+
+  RemoveTask({required this.index});
+}

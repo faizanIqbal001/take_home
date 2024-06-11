@@ -124,7 +124,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<ActiveTaskResponseModel, Failure>> deleteTask({
+  Future<Either<String, Failure>> deleteTask({
     required ActiveTaskResponseModel activeTaskResponseModel,
   }) async {
     final response = await networkHelper.delete(
@@ -136,11 +136,7 @@ class HomeRepoImpl implements HomeRepo {
 
     return response.fold(
       (success) {
-        ActiveTaskResponseModel activeTaskResponseModel;
-        activeTaskResponseModel = ActiveTaskResponseModel.fromJson(
-          jsonDecode(success),
-        );
-        return Left(activeTaskResponseModel);
+        return const Left("Task Deleted!");
       },
       (error) {
         return Right(
@@ -154,20 +150,25 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<String, Failure>> createTask({
+  Future<Either<ActiveTaskResponseModel, Failure>> createTask({
     required ActiveTaskResponseModel activeTaskResponseModel,
   }) async {
+    activeTaskResponseModel.projectId = appConstants.projectId;
     final response = await networkHelper.post(
       NetworkEndPoints.activeTasks.replaceAll(
-        "{taskId}",
-        activeTaskResponseModel.id.toString(),
+        "/{taskId}",
+        '',
       ),
       body: activeTaskResponseModel.toJson(),
     );
 
     return response.fold(
       (success) {
-        return const Left("!");
+        ActiveTaskResponseModel activeTaskResponseModel =
+            ActiveTaskResponseModel();
+        activeTaskResponseModel =
+            ActiveTaskResponseModel.fromJson(jsonDecode(success));
+        return Left(activeTaskResponseModel);
       },
       (error) {
         return Right(

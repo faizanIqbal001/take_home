@@ -4,6 +4,6 @@ enum HomeScreenStatus {
   loaded,
   empty,
   error,
-  analyticsLoading,
-  analyticsLoaded,
+  taskCreatedSuccess,
+  taskRemoved,
 }

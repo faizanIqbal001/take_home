@@ -5,7 +5,6 @@ Future<void> main() async {
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-   //   await Firebase.initializeApp();
       await initializeDependencies();
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
