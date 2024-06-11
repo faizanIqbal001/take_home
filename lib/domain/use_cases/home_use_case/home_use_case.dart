@@ -100,15 +100,18 @@ class HomeUseCase {
     return response.fold(
       (success) {
         for(var section in sections!){
-          if(section.id == success.sectionId && section.name == "ToDo"){
-            toDo.add(success);
-          }
-          if(section.id == success.sectionId && section.name == "InProgress"){
-            inProgress.add(success);
-          }
-          if(section.id == success.sectionId && section.name == "Done"){
-            done.add(success);
-          }
+          // if(section.id == success.sectionId && section.name == "ToDo"){
+          //   toDo.remove(success);
+          //   toDo.add(success);
+          // }
+          // if(section.id == success.sectionId && section.name == "InProgress"){
+          //   inProgress.remove(success);
+          //   inProgress.add(success);
+          // }
+          // if(section.id == success.sectionId && section.name == "Done"){
+          //   done.remove(success);
+          //   done.add(success);
+          // }
         }
         return Left(
           Success(),
