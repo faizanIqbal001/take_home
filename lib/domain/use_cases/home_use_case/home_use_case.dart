@@ -19,6 +19,8 @@ class HomeUseCase {
 
   String Uuid = "";
 
+  late ActiveTaskResponseModel createModel;
+
   ///Get Specific Project Based On Id
   Future<Either<Success, Failure>> getSingleProject() async {
     getUuid();
@@ -113,6 +115,7 @@ class HomeUseCase {
           //   done.add(success);
           // }
         }
+        createModel = success;
         return Left(
           Success(),
         );

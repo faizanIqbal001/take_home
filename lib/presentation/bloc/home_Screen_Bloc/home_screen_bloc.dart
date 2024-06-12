@@ -318,21 +318,21 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     await homeUseCase
         .createTask(activeTaskResponseModel: activeTaskResponseModel)
         .whenComplete(() {
-      // if (state.selectedTaskType == "ToDo") {
-      //   homeUseCase.toDo.add(activeTaskResponseModel);
-      // }
-      // if (state.selectedTaskType == "InProgress") {
-      //   homeUseCase.inProgress.add(activeTaskResponseModel);
-      // }
-      // if (state.selectedTaskType == "Done") {
-      //   homeUseCase.done.add(activeTaskResponseModel);
-      // }
+      if (state.selectedTaskType == "ToDo") {
+        state.toDo.add(homeUseCase.createModel);
+      }
+      if (state.selectedTaskType == "InProgress") {
+        state.inProgress.add(homeUseCase.createModel);
+      }
+      if (state.selectedTaskType == "Done") {
+        state.done.add(homeUseCase.createModel);
+      }
       emit(
         state.copyWith(
           status: HomeScreenStatus.taskCreatedSuccess,
-          toDo: homeUseCase.toDo,
-          inProgress: homeUseCase.inProgress,
-          done: homeUseCase.done,
+          toDo: state.toDo,
+          inProgress: state.inProgress,
+          done: state.done,
         ),
       );
     });
